@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApps Link Generator</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: 0;
+        }
+
+        body {
+            box-sizing: border-box;
+            background: #0abb28;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        img {
+            width: 100px;
+        }
+
+        .con {
+            width: 430px;
+            height: 500px;
+            background: #d7cdcd;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #000;
+            position: relative;
+        }
+
+        .top {
+            padding: 12px 15px;
+            flex-direction: row;
+            display: flex;
+            background: #0abb28;
+            border-bottom: 3px solid #000;
+        }
+
+        .top h1 {
+            color: aliceblue;
+            font-weight: 600;
+            font-family: sans-serif;
+            position: absolute;
+            right: 40px;
+            top: 5%;
+        }
+
+        input {
+            margin: 19px 40px;
+            width: 85%;
+            padding: 10px;
+            border: navajowhite;
+            border-bottom: 3.5px solid green;
+            background: transparent;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 600;
+            font-family: 'Gill Sans' sans-serif;
+        }
+
+        .errors {
+            color: rgb(135, 6, 6);
+            font-weight: 600;
+            font-size: large;
+            text-align: center;
+            display: none;
+        }
+
+        .bb {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px;
+            background: hsl(120, 100%, 25%);
+            color: #d7cdcd;
+            font-weight: 600;
+            font-family: sans-serif;
+            width: 50%;
+            letter-spacing: .1em;
+            margin: 8px 20px;
+            border: none;
+            font-size: larger;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 600ms linear;
+        }
+
+        .btn:hover {
+            background: hsl(120, 91%, 22%);
+        }
+
+        .img {
+            width: 17px;
+            background: red;
+            border-radius: 40px;
+        }
+
+        .l {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .l button {
+            margin: 30px 1px 30px 30px;
+            width: 33%;
+            padding: 13px;
+            cursor: pointer;
+            border: none;
+            color: #d7cdcd;
+            background-color: green;
+            font-weight: 600;
+            font-size: 16px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            transition: 500ms linear;
+            border-radius: 8px;
+        }
+
+        .l button:hover {
+            background: #b22222;
+        }
+
+        .l cite {
+            margin: 40px 1px 20px 20px;
+            font-size: 13px;
+            padding: 5px;
+            width: 84%;
+            font-weight: 600;
+            font-family: sans-serif;
+            font-size: 20px;
+            flex: 1;
+            overflow: hidden scroll;
+            border-bottom: 3px solid green;
+        }
+
+        .sh {
+            display: block;
+        }
+
+        @media only screen and (max-width: 600px) {
+        .con {
+            width: 90%;
+        }
+
+        .top h1 {
+            font-size: 18px;
+        }
+
+        input {
+            margin: 15px 20px;
+            font-size: 18px;
+        }
+
+        .btn {
+            font-size: 16px;
+        }
+
+        .l button {
+            margin: 15px 1px 15px 15px;
+            font-size: 14px;
+        }
+
+        .l cite {
+            margin: 20px 1px 10px 10px;
+            font-size: 12px;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .con {
+            width: 90%;
+        }
+
+        .top h1 {
+            font-size: 16px;
+        }
+
+        input {
+            margin: 10px 20px;
+            font-size: 14px;
+        }
+
+        .btn {
+            font-size: 14px;
+            width: 70%;
+        }
+
+        .l button {
+            margin: 10px 1px 10px 15px;
+            font-size: 12px;
+            padding: 10px;
+        }
+
+        .l cite {
+            margin: 15px 1px 5px 10px;
+            font-size: 12px;
+        }
+    }
+
+
+    </style>
+
+</head>
+<body>
+
+    <div class="con">
+
+        <div class="top">
+
+            <img src="whatsapp.png" alt="whatsapp app">
+
+            <h1>WhatsApps Link</h1>
+
+        </div>
+
+        <input type="number" id="nCode" placeholder="insert your contry code">
+
+        <div>
+            <p class="errors" id="error2">please insert your contry code <img class="img" src="info.png" alt="info"></p>
+        </div>
+
+        <input type="number" id="number" placeholder="insert your number here..">
+
+        <div>
+            <p class="errors" id="error1">please insert your number <img class="img" src="info.png" alt="info"</p>
+        </div>
+
+        <div class="bb">
+            <button class="btn">Generate Link</button>
+        </div>
+
+        <div class="l">
+            <button onclick="copyLink()">Copy Link</button>
+            <cite id="link"></cite>
+        </div>
+    </div>
+
+    <script>
+
+        const btn = document.querySelector('.btn');
+
+        const error1 = document.querySelector('#error1');
+
+        const error2 = document.querySelector('#error2');
+
+        const number = document.querySelector('#number');
+
+        const link = document.querySelector('#link'); 
+
+        const nCode = document.querySelector('#nCode');
+
+        let a = '';
+        
+        btn.addEventListener("click", () => {
+
+            let num = number.value;
+
+            let nc = nCode.value;
+
+            let li = '';
+            
+            if (nCode.value === '') {
+                error2.style.display = 'block';
+                setTimeout(() => {
+                    error2.remove();
+                }, 3000);
+                li += '';
+            } else if (number.value === '') {
+                error1.classList.add('sh');
+                setTimeout(() => {
+                    error1.remove();
+                }, 3000);
+                link.textContent = '';
+            } else {
+                li += `https://wa.me/${nc}${num}`;
+            }
+
+            link.textContent = li;
+        });
+
+        console.log(a)
+        /*
+        function copyLink() {
+                console.log(a)
+                document.execCommand("copy");
+        };*/
+
+        function copyLink() {
+            const linkText = document.querySelector('#link').textContent;
+            const tempInput = document.createElement('input');
+            tempInput.value = linkText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+        }
+        
+
+    </script>
+    
+</body>
+</html>
